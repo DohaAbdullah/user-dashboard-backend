@@ -19,7 +19,7 @@ public class AppUserController {
     @Autowired
     private AppUserService appUserService;
 
-    @GetMapping("/users")
+    @GetMapping("/app/users")
     public Set<Optional<AppUser>> getAllUsers(@RequestParam(required = false) String username) {
         if (username == null) {
             return appUserService.findAllUsers();
@@ -30,7 +30,7 @@ public class AppUserController {
         }
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/app/{id}")
     public ResponseEntity<Optional<AppUser>> findById(@PathVariable Long id) {
         Optional<AppUser> appUser = Optional.ofNullable(appUserService.findById(id));
         if (appUser != null) {
@@ -40,7 +40,7 @@ public class AppUserController {
         }
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/app/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         boolean deleted = appUserService.deleteUserById(id);
         if (deleted) {

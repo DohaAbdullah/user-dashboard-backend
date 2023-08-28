@@ -2,6 +2,7 @@ package com.systems.userdashboardbackend.controllers;
 
 
 import com.systems.userdashboardbackend.models.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@CrossOrigin
+@Slf4j
 @RequestMapping("/user")
 public class UserController {
 
@@ -34,7 +35,9 @@ public class UserController {
 
     @GetMapping("/hello")
     public String getHello() {
-        return "Hello ";
+        String test = "Hello";
+        log.info("Hello");
+        return test;
     }
 
     @GetMapping("/user/{id}")

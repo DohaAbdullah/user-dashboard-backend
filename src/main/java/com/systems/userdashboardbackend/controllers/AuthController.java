@@ -58,7 +58,7 @@ public class AuthController {
     @PostMapping("register")
     private ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
         if (userRepository.existsByUsername(registerDto.getUsername())) {
-            return new ResponseEntity<>("username is taken ", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("username is taken ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         AppUser user = new AppUser();
         user.setUsername(registerDto.getUsername());
@@ -72,6 +72,6 @@ public class AuthController {
         user.setRoles(useroles);
         userRepository.save(user);
 
-        return new ResponseEntity<>("User registered success!", HttpStatus.OK);
+        return new ResponseEntity<>("User registered success!", HttpStatus.CREATED);
     }
 }
