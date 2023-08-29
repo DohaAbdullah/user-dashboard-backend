@@ -2,7 +2,6 @@ package com.systems.userdashboardbackend.controllers;
 
 
 import com.systems.userdashboardbackend.models.User;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +14,13 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@Slf4j
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users")
+    @GetMapping("/all-users")
     public Set<User> getAllUsers(@RequestParam(required = false) String email) {
         if (email == null) {
             return userService.findAllUsers();
@@ -35,12 +33,10 @@ public class UserController {
 
     @GetMapping("/hello")
     public String getHello() {
-        String test = "Hello";
-        log.info("Hello");
-        return test;
+       return "hello Doha";
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/find/{id}")
     public ResponseEntity<Optional<User>> findById(@PathVariable Long id) {
         Optional<User> user = userService.findById(id);
         if (user != null) {

@@ -6,8 +6,10 @@ import com.systems.userdashboardbackend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @Service
 public class ProductsService {
@@ -24,9 +26,14 @@ public class ProductsService {
         return productRepository.findAll();
     }
 
-    public Product findProduct(Long id){
-        Optional<Product> product = productRepository.findById(id);
-        Product p = product.get();
-        return p;
+    public Optional<Product> findProduct(Long id) {
+        Predicate<Product> productFound = product -> product.getId().equals(id);
+        return productRepository.findAll()
+                .stream()
+                .filter(productFound)
+                .findFirst();
+
     }
+
+
 }

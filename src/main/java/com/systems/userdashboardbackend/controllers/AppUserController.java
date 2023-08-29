@@ -40,7 +40,7 @@ public class AppUserController {
         }
     }
 
-    @DeleteMapping("/app/{id}")
+    @DeleteMapping("/app/delete/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         boolean deleted = appUserService.deleteUserById(id);
         if (deleted) {
@@ -50,7 +50,7 @@ public class AppUserController {
         }
     }
 
-    @PostMapping("/createUser")
+    @PostMapping("/app/create-user")
     public ResponseEntity<AppUser> addUser(@RequestBody AppUser newUser) {
         AppUser createdUser = appUserService.createUser(newUser);
         if (createdUser != null) {
@@ -60,7 +60,7 @@ public class AppUserController {
         }
     }
 
-    @PatchMapping("/user/{id}")
+    @PatchMapping("/app/user/{id}")
     public ResponseEntity<AppUser> updateUser(@PathVariable Long id, @RequestBody AppUser updatedUser) {
         Optional<AppUser> optionalUser = Optional.ofNullable(appUserService.findById(id));
         if (optionalUser.isPresent()) {
@@ -81,7 +81,7 @@ public class AppUserController {
         }
     }
 
-    @GetMapping("/current-user")//logged-in-user
+    @GetMapping("/app/logged-in-user")//logged-in-user
     public String getLoggedInUser(Principal principal) {
         return principal.getName();
     }
